@@ -16,7 +16,7 @@ fluidPage(
     ),
     card(
       # Space for plotting output graph
-      tableOutput("outputGraph")     
+      plotOutput("outputGraph")     
     )
   )
 )

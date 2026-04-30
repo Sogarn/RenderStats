@@ -12,7 +12,7 @@ raidpace_df <- read.csv("data/raidpace.csv",
 
 # Convert to pivotlonger table with temporary progression name
 raidpace_df <- raidpace_df %>% pivot_longer(
-  cols = !raid,
+  cols = !c(id, raid),
   names_to = "raid_week",
   values_to = "temp_progression",
   values_drop_na = TRUE

@@ -18,31 +18,14 @@ function(input, output, session) {
   })
   
   # Output----
-  output$outputGraph <- renderTable({
-    raidpace_filtered()
-  })
+  output$outputGraph <- renderPlot({
+    ggplot(raidpace_filtered(), aes(x = raid_week,
+                                    y = progression,
+                                    col  = raid, group = id)) +
+      geom_line() +
+      theme_light() +
+      labs(title="Raid progression", x="Raid Week", y="Progression") +
+      ylim(0, 1)
+  })      
   
 }
-
-# Saving this for later
-# # Update what data to plot by row----
-# raidpace_filtered <- reactive({
-#   # Pick rows we need
-#   raidpace_df[input$raidGroupInput, , drop = FALSE] %>%
-#     # Pivot
-#     pivot_longer(
-#       cols = everything,
-#       names_to = "Raid_Week",
-#       values_to = "Progression"
-#     )
-# })
-# 
-# # Output graph----
-# output$outputGraph <- 
-#   renderPlot({
-#     ggplot(raidpace_filtered(), aes(x = Raid_Week, y = Progression, col = raid)) +
-#       geom_line() +
-#       theme_minimal() +
-#       labs(title="Raid progression", x="Raid_Week", y="Progression")
-#   })      
-# }
