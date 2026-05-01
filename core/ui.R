@@ -8,7 +8,7 @@ fluidPage(
       card(
         checkboxGroupInput("raidGroupInput", label = h3("Raid Select"),
                            choices = unique(raidpace_df$raid),
-                           selected = unique(raidpace_df$raid)),
+                           selected = character(0)),
         # Add all and none buttons
         actionButton("selectAllButton", label = "All"),
         actionButton("selectNoneButton", label = "None")      
