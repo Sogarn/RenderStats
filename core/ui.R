@@ -11,7 +11,11 @@ fluidPage(
                            selected = character(0)),
         # Add all and none buttons
         actionButton("selectAllButton", label = "All"),
-        actionButton("selectNoneButton", label = "None")      
+        actionButton("selectNoneButton", label = "None"),
+      ),
+      # Toggle average graph TODO: create average data + chart
+      card(
+        actionButton("toggleAverage", label = "Toggle Average")
       )
     ),
     card(
