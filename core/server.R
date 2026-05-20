@@ -30,7 +30,8 @@ function(input, output, session) {
       scale_color_discrete(
         breaks = unique(raidpace_df$raid)) +
       theme(
-        plot.title = element_text(size = rel(2.0)) # Make title bigger
+        plot.title = element_text(size = rel(2.0)), # Make title bigger
+        panel.grid.minor = element_blank() # Remove minor gridlines
       ) +
       ylim(0, 1) +
       scale_x_continuous(
