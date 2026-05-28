@@ -4,13 +4,29 @@ library(bslib)
 library(ggplot2)
 library(tidyr)
 
-# Load data
+# Gamba----
+# Load gambler data
+gamba_df <- read.csv("data/gamba.csv",
+                            header = TRUE,
+                            sep = ",")
+
+# Convert gambler data to pivotlonger table and fix date format
+gamba_df <- gamba_df %>% pivot_longer(
+  cols = !(gambler),
+  names_to = "date",
+  names_transform = list(date = ~ as.Date(.x, format = "X%m.%d.%Y")),
+  values_to = "gold",
+  values_drop_na = TRUE,
+)
+
+# Raid----
+# Load raid data
 raidpace_df <- read.csv("data/raidpace.csv",
                         header = TRUE,
                         sep = ",",
                         stringsAsFactors = FALSE)
 
-# Convert to pivotlonger table with temporary progression name
+# Convert raid data to pivotlonger table with temporary progression name
 raidpace_df <- raidpace_df %>% pivot_longer(
   cols = !c(raid),
   names_to = "raid_week",
