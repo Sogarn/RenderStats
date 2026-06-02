@@ -21,32 +21,7 @@ page_fillable(
   # Actual panels----
   title = "Render Stats",
   navset_card_tab(
-    nav_panel(title = "Raid Tier Progression", 
-              # Sidebar----
-              layout_sidebar(
-                title = "Render Stats",
-                # Generate checkbox sidebar from dataset
-                sidebar = sidebar(
-                  card(
-                    checkboxGroupInput("raidGroupInput", label = h3("Raid Select"),
-                                       choices = unique(raidpace_df$raid),
-                                       selected = character(0)),
-                    # Add all and none buttons
-                    actionButton("raidSelectAllButton", label = "All"),
-                    actionButton("raidSelectNoneButton", label = "None"),
-                  ),
-                  # TODO: create average data + chart
-                  # Button that toggles average graph
-                  card(
-                    actionButton("raidToggleAverage", label = "Toggle Average")
-                  )
-                ),
-                card(
-                  # Space for plotting output graph
-                  plotOutput("raidOutputGraph")     
-                )
-              )
-    ),
+    # Moved gamba stats to first tab
     nav_panel(title = "Gamba Stats",
               # Sidebar----
               layout_sidebar(
@@ -65,6 +40,32 @@ page_fillable(
                 card(
                   # Space for plotting output graph
                   plotOutput("gambaOutputGraph")     
+                )
+              )
+    ),
+    nav_panel(title = "Raid Tier Progression", 
+              # Sidebar----
+              layout_sidebar(
+                title = "Render Stats",
+                # Generate checkbox sidebar from dataset
+                sidebar = sidebar(
+                  card(
+                    checkboxGroupInput("raidGroupInput", label = h3("Raid Select"),
+                                       choices = unique(raidpace_df$raid),
+                                       selected = character(0)),
+                    # Add all and none buttons
+                    actionButton("raidSelectAllButton", label = "All"),
+                    actionButton("raidSelectNoneButton", label = "None"),
+                  ),
+                  # TODO: create average data + chart
+                  # Button that toggles average graph
+                  #card(
+                    #actionButton("raidToggleAverage", label = "Toggle Average")
+                  #)
+                ),
+                card(
+                  # Space for plotting output graph
+                  plotOutput("raidOutputGraph")     
                 )
               )
     )

@@ -53,9 +53,10 @@ function(input, output, session) {
         plot.title = element_text(size = rel(1.5)), # Make title bigger
         panel.grid.minor = element_blank() # Remove minor gridlines
       ) +
-      ylim(0, 1) +
       scale_x_continuous(
-        breaks = seq(1, 12, by = 1))
+        breaks = seq(1, 12, by = 1)) +
+      scale_y_continuous(labels = scales::percent,
+                         limits = c(0,1))
   })
   
   # Gambler
