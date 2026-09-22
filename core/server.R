@@ -14,15 +14,26 @@ function(input, output, session) {
                              selected = character(0))
   })
   # Gamba
-  # Select all gamba button
-  observeEvent(input$gambaSelectAllButton, {
-    updateCheckboxGroupInput(session, "gambaGroupInput",
-                             selected = unique(gamba_df$gambler))
+  # 12.1----
+  # Select all gamba button Patch 12.1
+  observeEvent(input$gamba121_SelectAllButton, {
+    updateCheckboxGroupInput(session, "gamba_121_GroupInput",
+                             selected = unique(gamba_121_df))
   })
-  
-  # Select none gamba button
-  observeEvent(input$gambaSelectNoneButton, {
-    updateCheckboxGroupInput(session, "gambaGroupInput",
+  # Select none gamba button Patch 12.1
+  observeEvent(input$gamba_121_SelectNoneButton, {
+    updateCheckboxGroupInput(session, "gamba_121_GroupInput",
+                             selected = character(0))
+  })
+  # 12.0----
+  # Select all gamba button Patch 12.0
+  observeEvent(input$gamba120_SelectAllButton, {
+    updateCheckboxGroupInput(session, "gamba_120_GroupInput",
+                             selected = unique(gamba_120_df))
+  })
+  # Select none gamba button Patch 12.0
+  observeEvent(input$gamba_120_SelectNoneButton, {
+    updateCheckboxGroupInput(session, "gamba_120_GroupInput",
                              selected = character(0))
   })
   
@@ -32,9 +43,12 @@ function(input, output, session) {
     raidpace_df %>% dplyr::filter(raidpace_df$raid %in% input$raidGroupInput)
   })
   # Gamba
-  gamba_filtered <- reactive({
-    gamba_df %>% dplyr::filter(gamba_df$gambler %in% input$gambaGroupInput)
+  gamba_121_filtered <- reactive({
+    gamba_121_df %>% dplyr::filter(gamba_121_df$gambler %in% input$gamba_121_GroupInput)
   }) 
+  gamba_120_filtered <- reactive({
+    gamba_120_df %>% dplyr::filter(gamba_120_df$gambler %in% input$gamba_120_GroupInput)
+  })
   
   # Output----
   # Raid
@@ -59,9 +73,9 @@ function(input, output, session) {
                          limits = c(0,1))
   })
   
-  # Gambler
-  output$gambaOutputGraph <- renderPlot({
-    ggplot(gamba_filtered(), aes(x = date,
+  # Gambler Patch 12.1
+  output$gamba_121_OutputGraph <- renderPlot({
+    ggplot(gamba_121_filtered(), aes(x = date,
                          y = gold,
                          color = gambler)) +
       geom_line(linewidth = 1.5) +
@@ -76,6 +90,26 @@ function(input, output, session) {
       ) + # remove scientific notation and set 100k gridlines
       scale_y_continuous(breaks = seq(-1000000, 1000000, by = 100000),
                          labels = scales::label_comma()) + # add commas to y axis
-      scale_x_continuous(breaks = gamba_df$date) # Show every date value
-  })  
+      scale_x_continuous(breaks = gamba_121_df$date) # Show every date value
+  })
+  
+  # Gambler Patch 12.0
+  output$gamba_120_OutputGraph <- renderPlot({
+    ggplot(gamba_120_filtered(), aes(x = date,
+                                    y = gold,
+                                    color = gambler)) +
+      geom_line(linewidth = 1.5) +
+      geom_point(size = 4) +
+      geom_hline(yintercept = 0) + # add line at zero
+      theme_light(base_size = 16) + # Make all fonts bigger
+      labs(title="Gamba Journeys", x="Date", y="Gold") +
+      theme(
+        plot.title = element_text(size = rel(1.5)), # Make title bigger
+        axis.text.x = element_text(angle = 45, hjust = 1), # angle the dates
+        panel.grid.minor.x = element_blank() # Remove minor gridlines
+      ) + # remove scientific notation and set 100k gridlines
+      scale_y_continuous(breaks = seq(-1000000, 1000000, by = 100000),
+                         labels = scales::label_comma()) + # add commas to y axis
+      scale_x_continuous(breaks = gamba_120_df$date) # Show every date value
+  }) 
 }

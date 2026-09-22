@@ -5,13 +5,25 @@ library(ggplot2)
 library(tidyr)
 
 # Gamba----
-# Load gambler data
-gamba_df <- read.csv("data/gamba.csv",
-                            header = TRUE,
-                            sep = ",")
-
+# Load gambler data 12.1
+gamba_121_df <- read.csv("data/gamba-12.1.csv",
+                        header = TRUE,
+                        sep = ",")
 # Convert gambler data to pivotlonger table and fix date format
-gamba_df <- gamba_df %>% pivot_longer(
+gamba_121_df <- gamba_121_df %>% pivot_longer(
+  cols = !(gambler),
+  names_to = "date",
+  names_transform = list(date = ~ as.Date(.x, format = "X%m.%d.%Y")),
+  values_to = "gold",
+  values_drop_na = TRUE,
+)
+
+# Load gambler data 12.0
+gamba_120_df <- read.csv("data/gamba-12.0.csv",
+                         header = TRUE,
+                         sep = ",")
+# Convert gambler data to pivotlonger table and fix date format
+gamba_120_df <- gamba_120_df %>% pivot_longer(
   cols = !(gambler),
   names_to = "date",
   names_transform = list(date = ~ as.Date(.x, format = "X%m.%d.%Y")),

@@ -22,24 +22,53 @@ page_fillable(
   title = "Render Stats",
   navset_card_tab(
     # Moved gamba stats to first tab
-    nav_panel(title = "Gamba Stats",
-              # Sidebar----
-              layout_sidebar(
-                title = "Current Tier Gamba Stats",
-                # Generate checkbox sidebar from gamba dataset
-                sidebar = sidebar(
-                  card(
-                    checkboxGroupInput("gambaGroupInput", label = h3("Gambler Select"),
-                                       choices = unique(gamba_df$gambler),
-                                       selected = character(0)),
-                    # Add all and none buttons
-                    actionButton("gambaSelectAllButton", label = "All"),
-                    actionButton("gambaSelectNoneButton", label = "None"),
-                  ),
+    nav_panel(title = "Gamba Stats By Patch",
+              # Sub tabs
+              navset_card_tab(
+                # Panels
+                nav_panel(
+                  title = "12.1",
+                  # Sidebar----
+                  layout_sidebar(
+                    title = "12.1 Gamba Stats",
+                    # Generate checkbox sidebar from gamba dataset
+                    sidebar = sidebar(
+                      card(
+                        checkboxGroupInput("gamba_121_GroupInput", label = h3("Gambler Select"),
+                                          choices = unique(gamba_121_df$gambler),
+                                          selected = character(0)),
+                        # Add all and none buttons
+                        actionButton("gamba_121_SelectAllButton", label = "All"),
+                        actionButton("gamba_121_SelectNoneButton", label = "None"),
+                      ),
+                    ),
+                    card(
+                      # Space for plotting output graph
+                      plotOutput("gamba_121_OutputGraph")
+                    )
+                  )
                 ),
-                card(
-                  # Space for plotting output graph
-                  plotOutput("gambaOutputGraph")     
+                nav_panel(
+                  title = "12.0",
+                  # Sidebar----
+                  layout_sidebar(
+                    title = "12.0 Gamba Stats",
+                    # Generate checkbox sidebar from gamba dataset
+                    sidebar = sidebar(
+                      card(
+                        checkboxGroupInput("gamba_120_GroupInput", label = h3("Gambler Select"),
+                                           choices = unique(gamba_120_df$gambler),
+                                           selected = character(0)),
+                        # Add all and none buttons
+                        actionButton("gamba_120_SelectAllButton", label = "All"),
+                        actionButton("gamba_120_SelectNoneButton", label = "None"),
+                      ),
+                    ),
+                    card(
+                      # Space for plotting output graph
+                      plotOutput("gamba_120_OutputGraph")
+                    )
+                  )
                 )
               )
     ),
