@@ -15,23 +15,23 @@ function(input, output, session) {
   })
   # Gamba
   # 12.1----
-  # Select all gamba button Patch 12.1
-  observeEvent(input$gamba121_SelectAllButton, {
+  # Select all gamba button
+  observeEvent(input$gamba_121_SelectAllButton, {
     updateCheckboxGroupInput(session, "gamba_121_GroupInput",
-                             selected = unique(gamba_121_df))
+                             selected = unique(gamba_121_df$gambler))
   })
-  # Select none gamba button Patch 12.1
+  # Select none gamba button
   observeEvent(input$gamba_121_SelectNoneButton, {
     updateCheckboxGroupInput(session, "gamba_121_GroupInput",
                              selected = character(0))
   })
   # 12.0----
-  # Select all gamba button Patch 12.0
-  observeEvent(input$gamba120_SelectAllButton, {
+  # Select all gamba button
+  observeEvent(input$gamba_120_SelectAllButton, {
     updateCheckboxGroupInput(session, "gamba_120_GroupInput",
-                             selected = unique(gamba_120_df))
+                             selected = unique(gamba_120_df$gambler))
   })
-  # Select none gamba button Patch 12.0
+  # Select none gamba button
   observeEvent(input$gamba_120_SelectNoneButton, {
     updateCheckboxGroupInput(session, "gamba_120_GroupInput",
                              selected = character(0))
