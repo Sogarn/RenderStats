@@ -82,7 +82,7 @@ function(input, output, session) {
       geom_point(size = 4) +
       geom_hline(yintercept = 0) + # add line at zero
       theme_light(base_size = 16) + # Make all fonts bigger
-      labs(title="Gamba Journeys", x="Date", y="Gold") +
+      labs(title="Gamba Journeys 12.1", x="Date", y="Gold") +
       theme(
         plot.title = element_text(size = rel(1.5)), # Make title bigger
         axis.text.x = element_text(angle = 45, hjust = 1), # angle the dates
@@ -103,7 +103,7 @@ function(input, output, session) {
       geom_point(size = 4) +
       geom_hline(yintercept = 0) + # add line at zero
       theme_light(base_size = 16) + # Make all fonts bigger
-      labs(title="Gamba Journeys", x="Date", y="Gold") +
+      labs(title="Gamba Journeys 12.0", x="Date", y="Gold") +
       theme(
         plot.title = element_text(size = rel(1.5)), # Make title bigger
         axis.text.x = element_text(angle = 45, hjust = 1), # angle the dates
