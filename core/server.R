@@ -88,7 +88,8 @@ function(input, output, session) {
         axis.text.x = element_text(angle = 45, hjust = 1), # angle the dates
         panel.grid.minor.x = element_blank() # Remove minor gridlines
       ) + # remove scientific notation and set 100k gridlines
-      scale_y_continuous(breaks = seq(-1000000, 1000000, by = 100000),
+      # shoutout -1,100,000 new bound from Evan
+      scale_y_continuous(breaks = seq(-1100000, 1000000, by = 100000),
                          labels = scales::label_comma()) + # add commas to y axis
       scale_x_continuous(breaks = gamba_121_df$date) # Show every date value
   })
@@ -108,7 +109,8 @@ function(input, output, session) {
         axis.text.x = element_text(angle = 45, hjust = 1), # angle the dates
         panel.grid.minor.x = element_blank() # Remove minor gridlines
       ) + # remove scientific notation and set 100k gridlines
-      scale_y_continuous(breaks = seq(-1000000, 1000000, by = 100000),
+      # shoutout -1,300,000 new bound from Magic
+      scale_y_continuous(breaks = seq(-1300000, 1000000, by = 100000),
                          labels = scales::label_comma()) + # add commas to y axis
       scale_x_continuous(breaks = gamba_120_df$date) # Show every date value
   }) 
